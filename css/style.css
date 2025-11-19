@@ -188,8 +188,6 @@ footer .neon:hover {
     }
     
     footer {
-        position: relative;
-        background: #1a1a1a;
-        padding: 1rem;
+        display: none;
     }
 }
