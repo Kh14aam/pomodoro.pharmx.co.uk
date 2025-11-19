@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://pomodoro.pharmx.co.uk/sitemap.xml

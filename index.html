@@ -1,275 +1,78 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta
-      name="viewport"
-      content="width=device-width, initial-scale=1, shrink-to-fit=no"
-    />
-    <title>Pomodoro Wave Timer</title>
-    <style>
-      :root {
-        /* Colors for blocks */
-        --block-1-color: #05E0E9;
-        --block-2-color: #FF2768;
-        --block-3-color: #32CD30;
-        --font-family: "Mona Sans", sans-serif;
-        --timer-font-size: 3rem;
-        --btn-font-size: 1.2rem;
-      }
-      * {
-        box-sizing: border-box;
-      }
-      html,
-      body {
-        margin: 0;
-        padding: 0;
-        height: 100%;
-        font-family: var(--font-family);
-      }
-      .container {
-        display: flex;
-        height: 100vh;
-        width: 100vw;
-      }
-      .block {
-        flex: 1;
-        position: relative;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        color: #fff;
-        padding: 20px;
-        overflow: hidden;
-      }
-      .block:nth-child(1) {
-        background: var(--block-1-color);
-      }
-      .block:nth-child(2) {
-        background: var(--block-2-color);
-      }
-      .block:nth-child(3) {
-        background: var(--block-3-color);
-      }
-      .timer {
-        font-size: var(--timer-font-size);
-        margin-bottom: 1rem;
-        z-index: 2;
-      }
-      button {
-        font-size: var(--btn-font-size);
-        padding: 0.8rem 1.2rem;
-        border: none;
-        border-radius: 0.5rem;
-        cursor: pointer;
-        background: rgba(255, 255, 255, 0.9);
-        color: #333;
-        z-index: 2;
-      }
-      button:disabled {
-        opacity: 0.5;
-        cursor: not-allowed;
-      }
-      .status {
-        margin-top: 1rem;
-        font-size: 1.2rem;
-        z-index: 2;
-      }
-      /* The wave element simulates a friendly fill from the bottom */
-      .wave {
-        position: absolute;
-        bottom: 0;
-        left: 0;
-        width: 100%;
-        height: 0%;
-        /* Using an updated SVG path for a smooth, glowing wave that will fully cover the block */
-        background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="%23fff" fill-opacity="0.4" d="M0,320L1440,320L1440,0L0,0Z"></path></svg>') no-repeat;
-        background-size: cover;
-        transition: height 0.5s linear;
-        filter: drop-shadow(0 0 10px rgba(255,255,255,0.7));
-        z-index: 1;
-      }
-      @media (max-width: 600px) {
-        .container {
-          flex-direction: column;
-        }
-        footer {
-          display: none;
-        }
-      }
-      /* Footer CSS */
-      footer {
-        position: fixed;
-        bottom: 20px;
-        width: 100%;
-        text-align: center;
-        padding: 1rem 0;
-        background: transparent;
-        font-family: "Mona Sans", sans-serif;
-        font-size: 16px;
-        color: white;
-        z-index: 10;
-      }
-      footer .transparent {
-        opacity: 0.7;
-      }
-      footer .neon {
-        color: #fff;
-        text-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #fff;
-        text-decoration: none;
-      }
-      footer .neon:hover {
-        text-shadow: 0 0 3px #fff, 0 0 6px #fff, 0 0 9px #fff;
-      }
-    </style>
-  </head>
-  <body>
-    <div class="container">
-      <!-- Block 1 -->
-      <div class="block" data-index="0">
-        <div class="timer">25:00</div>
-        <button>Start Timer</button>
-        <div class="status"></div>
-        <div class="wave"></div>
-      </div>
-      <!-- Block 2 -->
-      <div class="block" data-index="1">
-        <div class="timer">25:00</div>
-        <button disabled>Start Timer</button>
-        <div class="status"></div>
-        <div class="wave"></div>
-      </div>
-      <!-- Block 3 -->
-      <div class="block" data-index="2">
-        <div class="timer">25:00</div>
-        <button disabled>Start Timer</button>
-        <div class="status"></div>
-        <div class="wave"></div>
-      </div>
-    </div>
-    <!-- Audio Alert -->
-    <audio id="alertSound" src="https://pharmx.co.uk/congrats.mp3" preload="auto"></audio>
-    <script>
-      // For testing purposes, both durations are 25 minutes (25 * 60 seconds) for work session and 5 minutes (5 * 60 seconds) for break.
-      const SESSION_DURATION = 25 * 60; // work session duration (in seconds)
-      const BREAK_DURATION = 5 * 60;   // break duration (in seconds)
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    
+    <!-- SEO Meta Tags -->
+    <title>Pomodoro Wave Timer by PharmX | Pharmacy Education</title>
+    <meta name="description" content="Stay focused during your pharmacy education sessions with the Pomodoro Wave Timer. Use calm 25 minute cycles to improve study flow, revision quality and productivity with PharmX.">
+    <meta name="keywords" content="pomodoro timer, pharmacy education, GPhC exam, pharmacy student, pharmacist training, pharmacy revision, study timer, focus timer, pharmacy study tool, GPhC exam preparation, pharmacy exam, pharmacology revision, pharmaceutical education, pharmacy learning, MPharm study, pre-registration pharmacist, pharmacy CPD, continuing professional development pharmacy, pharmacy study techniques, time management pharmacy students, pharmacy productivity, pharmacy course, clinical pharmacy education">
+    <meta name="author" content="PharmX">
+    <meta name="robots" content="index, follow">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://pomodoro.pharmx.co.uk/">
+    <meta property="og:title" content="Pomodoro Wave Timer by PharmX | Pharmacy Education">
+    <meta property="og:description" content="Stay focused during your pharmacy education sessions with the Pomodoro Wave Timer. Use calm 25 minute cycles to improve study flow, revision quality and productivity with PharmX.">
+    <meta property="og:image" content="https://assets.pharmx.co.uk/X%20favicon.png">
+    
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://pomodoro.pharmx.co.uk/">
+    <meta property="twitter:title" content="Pomodoro Wave Timer by PharmX | Pharmacy Education">
+    <meta property="twitter:description" content="Stay focused during your pharmacy education sessions with the Pomodoro Wave Timer. Use calm 25 minute cycles to improve study flow, revision quality and productivity with PharmX.">
+    <meta property="twitter:image" content="https://assets.pharmx.co.uk/X%20favicon.png">
 
-      let currentSessionIndex = 0;
-      const blocks = document.querySelectorAll('.block');
-      const timers = [];
-
-      blocks.forEach((block, index) => {
-        const state = {
-          mode: 'idle', // modes: idle, session, break, completed
-          remaining: SESSION_DURATION,
-          interval: null,
-          timerDisplay: block.querySelector('.timer'),
-          button: block.querySelector('button'),
-          status: block.querySelector('.status'),
-          wave: block.querySelector('.wave')
-        };
-        timers[index] = state;
-        state.timerDisplay.textContent = formatTime(state.remaining);
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="https://assets.pharmx.co.uk/X%20favicon.png">
+    <link rel="apple-touch-icon" href="https://assets.pharmx.co.uk/X%20favicon.png">
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Figtree:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Styles -->
+    <link rel="stylesheet" href="css/style.css">
+    
+    <!-- PWA Manifest -->
+    <link rel="manifest" href="manifest.json">
+</head>
+<body>
+    <main class="container">
+        <!-- Block 1 -->
+        <section class="block" data-index="0" aria-label="Session 1">
+            <div class="timer">25:00</div>
+            <button type="button" aria-label="Start Timer">Start Focus</button>
+            <div class="status">Ready</div>
+            <div class="wave"></div>
+        </section>
         
-        // Only the current session's block is active
-        if(index !== currentSessionIndex) {
-          state.button.disabled = true;
-        }
+        <!-- Block 2 -->
+        <section class="block" data-index="1" aria-label="Session 2">
+            <div class="timer">25:00</div>
+            <button type="button" disabled aria-label="Start Timer">Start Focus</button>
+            <div class="status">Pending</div>
+            <div class="wave"></div>
+        </section>
         
-        state.button.addEventListener('click', () => {
-          // Only allow interaction on the current block
-          if(index !== currentSessionIndex) return;
-          if(state.mode === 'idle') {
-            startSession(index);
-          } else if (state.mode === 'session' || state.mode === 'break') {
-            if(state.interval) {
-              pauseTimer(index);
-            } else {
-              resumeTimer(index);
-            }
-          }
-        });
-      });
+        <!-- Block 3 -->
+        <section class="block" data-index="2" aria-label="Session 3">
+            <div class="timer">25:00</div>
+            <button type="button" disabled aria-label="Start Timer">Start Focus</button>
+            <div class="status">Pending</div>
+            <div class="wave"></div>
+        </section>
+    </main>
 
-      // Formats seconds as MM:SS.
-      function formatTime(seconds) {
-        const m = Math.floor(seconds / 60);
-        const s = seconds % 60;
-        return `${m.toString().padStart(2, '0')}:${s.toString().padStart(2, '0')}`;
-      }
-
-      // Updates the timer display and wave fill.
-      function updateUI(index) {
-        const state = timers[index];
-        state.timerDisplay.textContent = formatTime(state.remaining);
-        const totalDuration = (state.mode === 'session') ? SESSION_DURATION : BREAK_DURATION;
-        const progress = ((totalDuration - state.remaining) / totalDuration) * 100;
-        state.wave.style.height = progress + '%';
-      }
-
-      // Starts the session (work phase) for a block.
-      function startSession(index) {
-        const state = timers[index];
-        state.mode = 'session';
-        state.remaining = SESSION_DURATION;
-        state.button.textContent = "Pause";
-        state.interval = setInterval(() => tick(index), 1000);
-      }
-
-      // Called each second to update timer and check transitions.
-      function tick(index) {
-        const state = timers[index];
-        state.remaining--;
-        updateUI(index);
-
-        if(state.remaining <= 0) {
-          clearInterval(state.interval);
-          state.interval = null;
-          if(state.mode === 'session') {
-            // Play alert sound when the session ends.
-            document.getElementById('alertSound').play().catch(err => console.error(err));
-            // Transition to break phase.
-            state.mode = 'break';
-            state.remaining = BREAK_DURATION;
-            state.button.textContent = "Pause Break";
-            state.interval = setInterval(() => tick(index), 1000);
-          } else if(state.mode === 'break') {
-            // Session complete.
-            state.mode = 'completed';
-            state.button.textContent = "Session Complete";
-            state.button.disabled = true;
-            state.status.textContent = `Session ${currentSessionIndex + 1} complete`;
-            // Play alert sound when the break ends.
-            document.getElementById('alertSound').play().catch(err => console.error(err));
-            // Enable next block if it exists.
-            if(currentSessionIndex < blocks.length - 1) {
-              currentSessionIndex++;
-              timers[currentSessionIndex].button.disabled = false;
-            }
-          }
-        }
-      }
-
-      // Pauses the timer.
-      function pauseTimer(index) {
-        const state = timers[index];
-        clearInterval(state.interval);
-        state.interval = null;
-        state.button.textContent = (state.mode === 'session' ? "Resume" : "Resume Break");
-      }
-
-      // Resumes the timer.
-      function resumeTimer(index) {
-        const state = timers[index];
-        state.button.textContent = (state.mode === 'session' ? "Pause" : "Pause Break");
-        state.interval = setInterval(() => tick(index), 1000);
-      }
-    </script>
-    <!-- Footer HTML -->
     <footer>
-      <span class="transparent">Focus with </span>
-      <a class="neon" href="https://linktr.ee/pharmx" target="_blank" rel="noopener noreferrer">PharmX</a>
+        <span class="transparent">Focus with </span>
+        <a class="neon" href="https://linktr.ee/pharmx" target="_blank" rel="noopener noreferrer">PharmX</a>
     </footer>
-  </body>
+
+    <!-- Scripts -->
+    <script src="js/app.js"></script>
+</body>
 </html>

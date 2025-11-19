@@ -1,0 +1,21 @@
+{
+  "name": "Pomodoro Wave Timer",
+  "short_name": "Pomodoro",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#1a1a1a",
+  "theme_color": "#05E0E9",
+  "description": "A professional Pomodoro timer designed to help you maintain focus and flow.",
+  "icons": [
+    {
+      "src": "https://assets.pharmx.co.uk/X%20favicon.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "https://assets.pharmx.co.uk/X%20favicon.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
